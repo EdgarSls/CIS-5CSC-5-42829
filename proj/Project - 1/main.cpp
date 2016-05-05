@@ -379,7 +379,7 @@ int main(){
     while(gmOver!=true);   
       out.open("statistics.dat",ios::app);
       out<<endl;
-//    out<<"Player :"<<name<<endl; 
+    out<<"Player : "<<name<<endl; 
     out<<"Your total winnings were "<<money<<" dollars"<<endl;
     out<<"You won a total of "<<ttlwin<<" times"<<endl;
     out<<"You lost a total of "<<ttlose<<" times"<<endl;
