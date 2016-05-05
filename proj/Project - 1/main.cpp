@@ -1,38 +1,65 @@
 /*
   * File:   main.cpp
  * Author: Edgar Salas
- * purpose : demonstrate all the constructs we have learned so far
+ * purpose : First project demonstrate all the constructs we have learned so far
  * Created on May 4, 2016, 
  
  */
+
 #include<iostream>
 #include<cstdlib>
 #include<iomanip>
 #include<ctype.h>
+#include<fstream>
+#include<string>
+#include<cmath>
 using namespace std;
-int main(){
+int main(){ 
+    ofstream out;//Output file
+    ifstream in; //Input file
+    srand(time(NULL));
+   
+            
+    int    spin,
+            strt,
+            bettype=1,
+            column=1,
+            row,
+            chip10,
+            chip5,
+            chip1,
+            dozens;
+    
     bool gmOver=false,
-    bett=false,
+            bett=false,
             lose;
             
-    int    spin=21,
-            strt,
-            money=100,
-            column,
-            row,
-            dozens,
-            bet,bettype,
-            winning,
-            account,
-            bet2;
-    ushort  height=13,
-            width=4,
+    float money=100,
+            winning=0, 
+            bet,
+            bet2,
+            account=0;
+    unsigned short 
+     
             square=1,
-            ;        
-    char 
-            evenodd,
+            ttlose=0,
+            ttlwin=0;       
+     const unsigned short 
+            height=13,
+             width=4;
+     
+           
+    char evenodd,
             playag;
-    
+    string name;
+ 
+  
+  
+  ifstream file;
+  in.open ("title.txt");
+  in>>square;
+
+    cout<<setprecision(2)<< fixed;
     cout<<"GAME OF ROULETTE"<<endl;
     cout<<setw(23)<<1<<setw(6)<<2<<setw(6)<<3<<endl;
     cout<<setw(34)<<"columns bet "<<endl;
@@ -46,8 +73,13 @@ int main(){
         }
         cout<<endl;
     }
+    
     cout<<endl;
     cout<<endl;
+    cout<<"Enter Your name "<<endl;
+    getline(cin, name);
+    cout<<"Hello "<<name<<endl;
+    cout<<"Your current amount of gambling is "<<money<<" dollars"<<endl;
     cout<<"Types of betting "<<endl;
     cout<<"Straight bet press 1 payout is 35 to 1 odds "<<endl;
     cout<<"Low bet (1-18) press 2 payout is 1 to 1 odds "<<endl;
@@ -56,28 +88,41 @@ int main(){
     cout<<"Column bet press 5 payout is 2 to 1 odds "<<endl;
     cout<<"Row bet (str bet)  press 6 payout is 11 to 1 odds "<<endl;
     cout<<"Dozens bet (1-12)(13-24)(25-26) press 7 payout is 2 to 1 odds "<<endl;
-   
+    cout<<"The chip denominations are 10 , 5 , 1 "<<endl;
+    cout<<"Table min bet is 1 dollar and all bets are in 1 dollar increments table max is whatever you have in gambling money"<<endl;
     
     do{
       
     while(bett!=true){
-       
-      //spin=rand()%35+1;
+        
+      spin=rand()%35+1;
+      cout<<"Enter the chips you want to bet first the 10s then 5s and 1s enter any thing else besides a valid bet to QUIT the game"<<endl;
+      cin>>chip10;
+      cin>>chip5;
+      cin>>chip1;
+      if(!isdigit(chip10)&&!isdigit(chip5)&&!isdigit(chip1) )
+      {bet=(chip1*1)+(chip5*5)+(chip10*10);}
      
-     
-      cout<<"Enter the amount of money you want to bet"<<endl;
-      cin>>bet; 
-      cout<<"Now enter the type of bet you want to place"<<endl;
-      cin>>bettype;
-      bet2=bet;
+      if(bet<=money){
       
-     
+       do{ 
+           cout<<"Now enter the type of bet you want to place"<<endl;
+      cin>>bettype;
+          if (bettype<!8||bettype>8) cout<<"You didn't enter a valid bet"<<endl; 
+            }
+        while(bettype<!8||bettype>8);
+        
+        bet2=bet;
+                
        switch(bettype){
            
            //straight bet  35 to 1 odds
           case 1: 
+            
               cout<<"Enter the number you want to place a bet on "<<endl;
           cin>>strt;
+          if(!isdigit(strt)&&strt<=36){
+       
           if(strt==spin){
           winning=bet*=35;
           cout<<"win"<<endl; 
@@ -85,8 +130,8 @@ int main(){
           else if (!(strt==spin)){
           cout<<"lose"<<endl; lose=true; 
             }      
-          break;
-          
+          break;}
+          else{return 0;}
           //low bet 1 to 1 odds
           case 2 : if (spin>=19)
            {  cout<<"lose"<<endl; lose=true; 
@@ -110,8 +155,9 @@ int main(){
           
            //odd even bet 1 to 1 odds
            case 4: cout<<"Enter E for Even and O Odd"<<endl; 
-               cin>>evenodd;
-               toupper(evenodd);
+              cin>>evenodd;
+              if(!(evenodd=='e'||evenodd=='o')){return 0;}
+              toupper(evenodd);
            if (evenodd=='e'){
                if ( spin% 2== 0 ){
             cout<<"win"<<endl;
@@ -134,9 +180,11 @@ int main(){
            }
            break;
            
-           //columun bet 2 to 1 odds 
-           case 5:cout<<"Enter the column number"<<endl;
-               cin>>column;
+           //column bet 2 to 1 odds 
+        
+           case 5:cout<<"Enter the column number"<<endl;       
+           cin>>column;
+            if(!isdigit(column)&&column>=3){
            switch (column) {
                case 1:if (spin%3==1){
                 cout<<"win"<<endl;
@@ -165,11 +213,13 @@ int main(){
        }
                break;
            }
-           break;
+           break;}
+            else {return 0;}
            
            //row bet 11 to 1 odds
            case 6 : cout<<"Enter the row number (street bet)"<<endl;
                cin>>row;
+           if(!isdigit(row)&&row>=12){    
            switch(row ){
                case 1:if (spin==1||spin==2||spin==3){
                   cout<<"win"<<endl;
@@ -267,11 +317,13 @@ int main(){
                }
                break;
                  }
-           break;
+           break;}
+           else {return 0;}
            
            //dozens bet 2 to 1 odds
            case 7:cout<<"Enter the dozens number you want to bet on 1=(1-12) 2=(13-24) 3(25-36)"<<endl;
                cin>>dozens; 
+               if(!isdigit(dozens)&&dozens>=3){
            switch (dozens){
                case 1: if (spin>=1&&spin<=12){
                 cout<<"win"<<endl;
@@ -299,8 +351,8 @@ int main(){
                break;
                
            }
-           break;
-           
+           break;}
+               else{return 0;}
            
          
        default : cout<<"you didn't pick a bet "<<endl; return 0;
@@ -308,17 +360,11 @@ int main(){
        } 
        
         cout<<"The dealer got "<<spin<<endl;
-         (lose!=true)? ( money+=bet, account=money-=bet2):(account=money-=bet2 );
+        (lose!=true)? ( money+=bet, account=money-=bet2, ttlwin++):(account=money-=bet2, ttlose++ );
         (lose!=true)? (cout<<"Your winnings were "<<bet<<" dollars"<<endl):(cout<<"You lost "<<bet2<<" dollars"<<endl);
-      // cout<<"Your winnings were "<<winning<<" dollars"<<endl;
       
-       //money+=winning;
+      cout<<"Your current total of gambling money is "<<account<<" dollar "<<endl; 
       
-       //account=money-bet2;
-      cout<<"Your current total of gambling money is "<<account<<" dollar "<<endl;
-      
-     
-      cout<<money;
      
        if (account<=0){cout<<"You are  out of money "<<endl; bett=true;} 
        else {
@@ -326,17 +372,20 @@ int main(){
         cin>>playag;
     toupper(playag); 
       if (playag=='n'){bett=true;}}
+      } else {return 0;}
     }
-     
-     // gmOver!=true;
-    
-    gmOver=true;
-  
-     
-    
-    
+        gmOver=true;
     }
     while(gmOver!=true);   
-      
+      out.open("statistics.dat",ios::app);
+      out<<endl;
+//    out<<"Player :"<<name<<endl; 
+    out<<"Your total winnings were "<<money<<" dollars"<<endl;
+    out<<"You won a total of "<<ttlwin<<" times"<<endl;
+    out<<"You lost a total of "<<ttlose<<" times"<<endl;
+    out<<"You bet a total of "<<ttlwin+ttlose<<endl;
+    out.close();
+    in.close();
+    
     return 0;
 }
