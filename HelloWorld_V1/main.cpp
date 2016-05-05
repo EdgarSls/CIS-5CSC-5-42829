@@ -1,34 +1,168 @@
-/* 
- * File:   main.cpp
- * Author: Edgar Salas
- * first program 
- * Created on February 17, 2016, 9:45 AM
- */
-//System libraries
+#include <cstdlib>
 #include <iostream>
+
 using namespace std;
 
-//User Libraries
+ 
 
-//Global Constant
+int main()
 
-//Function Prototypes 
+{
 
-// Execution Begins Here:
+    char playerOne;
 
-/*
- * 
- */
-int main(int argc, char** argv) {
-    //Declare variables 
-    
-    //Initialize variables
-    
-    //Map the inputs to the outputs
-    
-    //Output the results 
-    cout<<"Hello WORLD"<<endl;
-    
-    //Exit Stage Right!
+    char playerTwo;
+
+     
+
+    cout << "Player 1: Enter R for rock, P for paper, or S for scissors: " << endl;
+
+    cin >> playerOne;
+
+     
+
+    cout << "Player 2: Enter R for rock, P for paper, or S for scissors: " << endl;
+
+    cin >> playerTwo;
+
+     
+
+    if (playerOne == 'r' || playerOne == 'R')
+
+    {
+
+            if  (playerTwo == 'r' || playerTwo == 'R')  {
+
+            cout << "Tie" << endl; }
+
+    }
+
+    else if (playerOne == 'p' || playerOne == 'P')
+
+    {
+
+        if  (playerTwo == 'p' || playerTwo == 'P')
+
+        {
+
+            cout << "Tie" << endl;
+
+        }
+
+    }
+
+    else if (playerOne == 's' || playerOne == 'S')
+
+    {
+
+    if  (playerTwo == 's' || playerTwo == 'S')
+
+    {
+
+    cout << "Tie" << endl; 
+
+    }
+
+     
+
+    }
+
+    else if (playerOne == 'p' || playerOne == 'P') 
+
+    {
+
+        if (playerTwo == 'r' || playerTwo == 'R')
+
+        {
+
+            cout << "Player 1 wins" << endl;
+
+        }
+
+ 
+
+    }
+
+    else if (playerOne == 'r' || playerOne == 'R')
+
+    {
+
+    if (playerTwo == 'p' || playerTwo == 'P')
+
+    {
+
+        cout << "Player 2 wins" << endl;
+
+    }  
+
+    }
+
+    else if (playerOne == 'p' || playerOne == 'P')
+
+    {
+
+    if (playerTwo == 's' || playerTwo == 'S')
+
+    {
+
+    cout << "Player 2 wins" << endl;   
+
+    }  
+
+    }
+
+    else if (playerOne == 's' || playerOne == 'S')
+
+    {
+
+        if (playerTwo == 'p' || playerTwo == 'P')
+
+        {
+
+                cout << "Player 1 wins" << endl;
+
+        }
+
+    }
+
+    else if (playerOne == 'r' || playerOne == 'R')
+
+    {
+
+    if  (playerTwo == 's' || playerTwo == 'S')
+
+    {
+
+    cout << "Player 1 wins" << endl;   
+
+    }  
+
+    }
+
+    else if (playerOne == 's' || playerOne == 'S')
+
+    {
+
+    if (playerTwo == 'r' || playerTwo == 'R')
+
+    {
+
+        cout << "Player 2 wins" << endl;
+
+    }  
+
+    }
+
+    else
+
+    {
+
+        cout << "Game canceled because of invalid entry." << endl;
+
+    }
+
     return 0;
-}
+
+    ;
+
+}  
