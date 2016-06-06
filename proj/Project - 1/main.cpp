@@ -18,8 +18,7 @@ int main(){
     ofstream out;//Output file
     ifstream in; //Input file
     srand(time(NULL));
-   
-            
+              
     int    spin,
             strt,
             bettype=1,
